@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .models import Post
 
 
 # Create your views here.
-def post_list(requets):
+def post_list(request):
     # 1. 브라우저에서 요청
     # 2. 요청이 runserver로 실행중인 서버에 도착
     # 3. runserver는 요청을 Django code로 전달
@@ -18,8 +19,21 @@ def post_list(requets):
     # HTTP프로토콜로 텍스트 데이터 응답을 변환
     # return HttpResponse('<html><body><h1>Post List</h1><p>Post 목록을 보여줄 예정입니다.</p></body>')
 
+    posts = Post.objects.all()
+    context = {
+        'posts':posts,
+    }
+
+
+    return render(
+        request=request,
+        template_name='blog/post_list.html',
+        context=context,
+    )
+
+    # 위 return코드와 같음
+    # return render(requets, 'blog/post_list.html')
     # 'blog/post_list.html" 템플릿 파일을 이용해 HTTP프로토콜로 응답
-    return render(requets, 'blog/post_list.html')
 
 
 def post_detail(request):
