@@ -11,6 +11,8 @@ urlpatterns = [
     # 53/asdf/ <-
     # re_path(r'(?P<pk>\d+)/$', views.post_detail)
     path('<int:pk>/', views.post_detail, name='post-detail'),
+    # /3/delete
+    path('<int:pk>/delete/', views.post_delete, name='post-delete')
 
     # localhost:8000/add 에 접근할 수 있는 path구현
     path('add/', views.post_add, name='post-add')
